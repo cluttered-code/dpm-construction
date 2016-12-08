@@ -1,5 +1,9 @@
 # DPM Construction
 
+[![Stories in Backlog](https://badge.waffle.io/cluttered-code/dpm-construction.svg?label=backlog&title=Backlog)](http://waffle.io/cluttered-code/dpm-construction)
+[![Stories in Ready](https://badge.waffle.io/cluttered-code/dpm-construction.svg?label=ready&title=Ready)](http://waffle.io/cluttered-code/dpm-construction)
+[![Stories in In Progress](https://badge.waffle.io/cluttered-code/dpm-construction.svg?label=in-progress&title=In Progress)](http://waffle.io/cluttered-code/dpm-construction)
+
 [![Build Status](https://saucelabs.com/browser-matrix/cluttered-code.svg)](https://saucelabs.com/beta/builds/a8b4729490d441b8a9d1cd0feee4bb93)
 
 [![Build Status](https://travis-ci.org/cluttered-code/dpm-construction.svg?branch=master)](https://travis-ci.org/cluttered-code/dpm-construction)
