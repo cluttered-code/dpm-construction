@@ -91,10 +91,10 @@
         </app-header>
 
         <iron-pages
+            role="main"
             selected="[[page]]"
             attr-for-selected="name"
-            fallback-selection="not-found"
-            role="main">
+            fallback-selection="not-found">
           <home-view name="home"></home-view>
           <not-found-view name="not-found"></not-found-view>
         </iron-pages>
