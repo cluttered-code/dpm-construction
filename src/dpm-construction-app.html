@@ -20,20 +20,27 @@
 <dom-module id="dpm-construction-app">
   <template>
     <style include="shared-styles">
-      :host {
-        --app-primary-color: #4285f4;
-        --app-secondary-color: black;
-        display: block;
+
+      app-toolbar {
+        background: var(--paper-toolbar-background);
+        color: var(--paper-toolbar-color);
       }
 
-      app-header {
-        color: #fff;
-        background-color: var(--app-primary-color);
-      }
-
-      app-header a {
-        color: #fff;
+      app-toolbar a,
+      app-toolbar a:active,
+      app-toolbar a:visited,
+      app-toolbar a:focus {
+        color: var(--paper-toolbar-color);
         text-decoration: none;
+      }
+
+      app-toolbar a:hover {
+        color: var(--paper-toolbar-color);
+        text-decoration: underline;
+      }
+
+      [flex-fit] {
+        @apply(--layout-fit);
       }
     </style>
 
@@ -54,7 +61,7 @@
 
     <app-drawer-layout fullbleed>
       <!-- Drawer Content -->
-      <app-drawer id="appDrawer">
+      <app-drawer id="appDrawer" opened="{{drawerOpened}}">
         <app-toolbar></app-toolbar>
         <iron-selector
             selected="[[page]]"
@@ -68,7 +75,7 @@
       <!-- Main Content -->
       <app-header-layout has-scrolling-region>
 
-        <app-header condenses reveals effects="waterfall">
+        <app-header fixed effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
             <div main-title>
@@ -90,14 +97,16 @@
           </app-toolbar>
         </app-header>
 
-        <iron-pages
-            selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="not-found"
-            role="main">
-          <home-view name="home"></home-view>
-          <not-found-view name="not-found"></not-found-view>
-        </iron-pages>
+        <section hero flex-fit>
+          <iron-pages
+              role="main"
+              selected="[[page]]"
+              attr-for-selected="name"
+              fallback-selection="not-found">
+            <home-view name="home"></home-view>
+            <not-found-view name="not-found"></not-found-view>
+          </iron-pages>
+        </section>
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -111,6 +120,9 @@
           type: String,
           reflectToAttribute: true,
           observer: '_pageChanged'
+        },
+        drawerOpened: {
+          type: Boolean
         }
       },
 
@@ -129,7 +141,7 @@
       },
 
       _closeDrawer: function() {
-        this.$.appDrawer.close();
+        this.drawerOpened = false;
       },
 
       _showPage404: function() {
