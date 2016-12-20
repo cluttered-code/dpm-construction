@@ -13,6 +13,8 @@
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
@@ -47,6 +49,17 @@
       [flex-fit] {
         @apply(--layout-fit);
       }
+
+      .link,
+      .link:hover,
+      .link:active,
+      .link:visited,
+      .link:focus {
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        text-decoration: none;
+        outline: none;
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -76,7 +89,9 @@
               attr-for-selected="name"
               role="navigation"
               on-tap="_closeDrawer">
-            <a name="home" href="/">Home</a>
+            <template is="dom-repeat" items="[[_navItems]]">
+              <a name="{{item.select}}" href="{{item.link}}">{{item.display}}</a>
+            </template>
           </iron-selector>
         </app-drawer>
       </template>
@@ -90,6 +105,7 @@
             <div main-title>
               <a href="/">DPM Construction</a>
             </div>
+            
             <!-- Online/Offline Icon -->
             <template is="dom-if" if="[[online]]">
               <div>
@@ -104,6 +120,21 @@
               </div>
             </template>
           </app-toolbar>
+
+          <!-- Tab Navigation -->
+          <template is="dom-if" if="[[largeScreen]]" restamp="true">
+            <app-toolbar>
+              <paper-tabs flex-fit
+                  selected="[[page]]"
+                  attr-for-selected="name">
+                  <template is="dom-repeat" items="[[_navItems]]">
+                    <paper-tab name="{{item.select}}" link>
+                      <a href="{{item.link}}" class="link" tabindex="-1">{{item.display}}</a>
+                    </paper-tab>
+                  </template>
+              </paper-tabs>
+            </app-toolbar>
+          </template>
         </app-header>
 
         <section hero flex-fit>
@@ -135,6 +166,20 @@
         },
         largeScreen: {
           type: Boolean
+        },
+        _navItems: {
+          type: Array,
+          value: function() {
+            return [{
+              select: 'home',
+              display: 'Home',
+              link: '/'
+            }, {
+              select: 'not-found',
+              display: 'Not Found',
+              link: '/not-found'
+            }];
+          }
         }
       },
 
