@@ -1,16 +1,21 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
@@ -57,20 +62,24 @@
       database-url="https://dpm-construction.firebaseio.com"
       api-key="AIzaSyBub_zhHGeThLY1FK5hPVaXITUpsesHOn4">
     </firebase-app>
-    <firebase-auth id="auth" online="{{online}}" provider="email"></firebase-auth>
+    <firebase-auth online="{{online}}" provider="email"></firebase-auth>
+
+    <iron-media-query query="min-width: 641px" query-matches="{{largeScreen}}"></iron-media-query>
 
     <app-drawer-layout fullbleed>
       <!-- Drawer Content -->
-      <app-drawer id="appDrawer" opened="{{drawerOpened}}">
-        <app-toolbar></app-toolbar>
-        <iron-selector
-            selected="[[page]]"
-            attr-for-selected="name"
-            role="navigation"
-            on-tap="_closeDrawer">
-          <a name="home" href="/">Home</a>
-        </iron-selector>
-      </app-drawer>
+      <template is="dom-if" if="[[!largeScreen]]" restamp="true">
+        <app-drawer opened="{{drawerOpened}}">
+          <app-toolbar></app-toolbar>
+          <iron-selector
+              selected="[[page]]"
+              attr-for-selected="name"
+              role="navigation"
+              on-tap="_closeDrawer">
+            <a name="home" href="/">Home</a>
+          </iron-selector>
+        </app-drawer>
+      </template>
 
       <!-- Main Content -->
       <app-header-layout has-scrolling-region>
@@ -82,13 +91,13 @@
               <a href="/">DPM Construction</a>
             </div>
             <!-- Online/Offline Icon -->
-            <template is="dom-if" if="{{online}}">
+            <template is="dom-if" if="[[online]]">
               <div>
-                <paper-icon-button id="online" icon="cloud"></paper-icon-button>
+                <paper-icon-button icon="cloud"></paper-icon-button>
                 <paper-tooltip>Online</paper-tooltip>
               </div>
             </template>
-            <template is="dom-if" if="{{!online}}">
+            <template is="dom-if" if="[[!online]]">
               <div>
                 <paper-icon-button icon="cloud-off" error></paper-icon-button>
                 <paper-tooltip>Offline</paper-tooltip>
@@ -122,6 +131,9 @@
           observer: '_pageChanged'
         },
         drawerOpened: {
+          type: Boolean
+        },
+        largeScreen: {
           type: Boolean
         }
       },
