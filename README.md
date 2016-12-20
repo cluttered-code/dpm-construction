@@ -4,9 +4,9 @@
 [![Stories in Ready](https://badge.waffle.io/cluttered-code/dpm-construction.svg?label=ready&title=Ready)](http://waffle.io/cluttered-code/dpm-construction)
 [![Stories in In Progress](https://badge.waffle.io/cluttered-code/dpm-construction.svg?label=in-progress&title=In Progress)](http://waffle.io/cluttered-code/dpm-construction)
 
-[![Build Status](https://saucelabs.com/browser-matrix/cluttered-code.svg)](https://saucelabs.com/beta/builds/a8b4729490d441b8a9d1cd0feee4bb93)
+[![Sauce Build Status](https://saucelabs.com/browser-matrix/dpm-construction.svg)](https://saucelabs.com/beta/builds/02c82c99df70441381bf5549613ab6d6)
 
-[![Build Status](https://travis-ci.org/cluttered-code/dpm-construction.svg?branch=master)](https://travis-ci.org/cluttered-code/dpm-construction)
+[![Travis Build Status](https://travis-ci.org/cluttered-code/dpm-construction.svg?branch=master)](https://travis-ci.org/cluttered-code/dpm-construction)
 
 ### Setup
 
