@@ -18,9 +18,7 @@
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/online-status-icon/online-status-icon.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -105,20 +103,7 @@
             <div main-title>
               <a href="/">DPM Construction</a>
             </div>
-            
-            <!-- Online/Offline Icon -->
-            <template is="dom-if" if="[[online]]">
-              <div>
-                <paper-icon-button icon="cloud"></paper-icon-button>
-                <paper-tooltip>Online</paper-tooltip>
-              </div>
-            </template>
-            <template is="dom-if" if="[[!online]]">
-              <div>
-                <paper-icon-button icon="cloud-off" error></paper-icon-button>
-                <paper-tooltip>Offline</paper-tooltip>
-              </div>
-            </template>
+            <online-status-icon></online-status-icon>
           </app-toolbar>
 
           <!-- Tab Navigation -->
