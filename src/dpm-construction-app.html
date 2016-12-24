@@ -44,15 +44,8 @@
         text-decoration: underline;
       }
 
-      .link,
-      .link:hover,
-      .link:active,
-      .link:visited,
-      .link:focus {
-        @apply(--layout-horizontal);
-        @apply(--layout-center-center);
-        text-decoration: none;
-        outline: none;
+      [tab-header] {
+        height: 48px;
       }
     </style>
 
@@ -105,13 +98,13 @@
 
           <!-- Tab Navigation -->
           <template is="dom-if" if="[[largeScreen]]" restamp="true">
-            <app-toolbar>
-              <paper-tabs flex-fit
+            <app-toolbar tab-header>
+              <paper-tabs flex-fit align-bottom
                   selected="[[page]]"
                   attr-for-selected="name">
                   <template is="dom-repeat" items="[[_navItems]]">
                     <paper-tab name="{{item.select}}" link>
-                      <a href="{{item.link}}" class="link" tabindex="-1">{{item.display}}</a>
+                      <a href="{{item.link}}" tabindex="-1">{{item.display}}</a>
                     </paper-tab>
                   </template>
               </paper-tabs>
