@@ -1,19 +1,26 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-app.html">
 <link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+
+<link rel="import" href="../bower_components/online-status-icon/online-status-icon.html">
 
 <link rel="import" href="shared-styles.html">
 
@@ -39,38 +46,49 @@
         text-decoration: underline;
       }
 
-      [flex-fit] {
-        @apply(--layout-fit);
+      paper-menu {
+        padding: 0;
+      }
+
+      [tab-header] {
+        height: 48px;
+      }
+
+      paper-tabs {
+        width: 250px;
+      }
+
+      iron-pages {
+        padding: 0 20px;
       }
     </style>
 
     <app-location route="{{route}}"></app-location>
-    <app-route
-      route="{{route}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}">
-    </app-route>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
     <firebase-app
       auth-domain="dpm-construction.firebaseapp.com"
       database-url="https://dpm-construction.firebaseio.com"
       api-key="AIzaSyBub_zhHGeThLY1FK5hPVaXITUpsesHOn4">
     </firebase-app>
-    <firebase-auth id="auth" online="{{online}}" provider="email"></firebase-auth>
+    <firebase-auth online="{{online}}" provider="email"></firebase-auth>
+
+    <iron-media-query query="min-width: 641px" query-matches="{{largeScreen}}"></iron-media-query>
 
     <app-drawer-layout fullbleed>
       <!-- Drawer Content -->
-      <app-drawer id="appDrawer" opened="{{drawerOpened}}">
-        <app-toolbar></app-toolbar>
-        <iron-selector
-            selected="[[page]]"
-            attr-for-selected="name"
-            role="navigation"
-            on-tap="_closeDrawer">
-          <a name="home" href="/">Home</a>
-        </iron-selector>
-      </app-drawer>
+      <template is="dom-if" if="[[!largeScreen]]" restamp="true">
+        <app-drawer opened="{{drawerOpened}}">
+          <app-toolbar>Menu</app-toolbar>
+            <paper-menu role="navigation" selected="[[page]]" attr-for-selected="name" on-tap="_closeDrawer">
+              <template is="dom-repeat" items="[[_navItems]]">
+                <a name="[[item.select]]" href="[[item.link]]" tabindex="-1">
+                  <paper-item>[[item.display]]</paper-item>
+                </a>
+              </template>
+            </paper-menu>
+        </app-drawer>
+      </template>
 
       <!-- Main Content -->
       <app-header-layout has-scrolling-region>
@@ -78,32 +96,33 @@
         <app-header fixed effects="waterfall">
           <app-toolbar>
             <paper-icon-button icon="menu" drawer-toggle></paper-icon-button>
-            <div main-title>
-              <a href="/">DPM Construction</a>
-            </div>
-            <!-- Online/Offline Icon -->
-            <template is="dom-if" if="{{online}}">
-              <div>
-                <paper-icon-button id="online" icon="cloud"></paper-icon-button>
-                <paper-tooltip>Online</paper-tooltip>
-              </div>
-            </template>
-            <template is="dom-if" if="{{!online}}">
-              <div>
-                <paper-icon-button icon="cloud-off" error></paper-icon-button>
-                <paper-tooltip>Offline</paper-tooltip>
-              </div>
-            </template>
+            <a href="/" tabindex="-1">
+              <paper-icon-button icon="home"></paper-icon-button>
+            </a>
+            <div main-title>DPM Construction</div>
+            <online-status-icon></online-status-icon>
           </app-toolbar>
+
+          <!-- Tab Navigation -->
+          <template is="dom-if" if="[[largeScreen]]" restamp="true">
+            <app-toolbar tab-header>
+              <paper-tabs align-bottom selected="[[page]]" attr-for-selected="name">
+                <template is="dom-repeat" items="[[_navItems]]">
+                  <paper-tab name="[[item.select]]" link>
+                    <a href="[[item.link]]" tabindex="-1">[[item.display]]</a>
+                  </paper-tab>
+                </template>
+              </paper-tabs>
+            </app-toolbar>
+          </template>
         </app-header>
 
         <section hero flex-fit>
-          <iron-pages
-              role="main"
-              selected="[[page]]"
-              attr-for-selected="name"
-              fallback-selection="not-found">
+          <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="not-found">
             <home-view name="home"></home-view>
+            <projects-view name="projects"></projects-view>
+            <services-view name="services"></services-view>
+            <contact-us-view name="contact-us"></contact-us-view>
             <not-found-view name="not-found"></not-found-view>
           </iron-pages>
         </section>
@@ -123,6 +142,27 @@
         },
         drawerOpened: {
           type: Boolean
+        },
+        largeScreen: {
+          type: Boolean
+        },
+        _navItems: {
+          type: Array,
+          value: function() {
+            return [{
+              select: 'projects',
+              display: 'Projects',
+              link: '/projects'
+            }, {
+              select: 'services',
+              display: 'Services',
+              link: '/services'
+            }, {
+              select: 'contact-us',
+              display: 'Contact Us',
+              link: '/contact-us'
+            }];
+          }
         }
       },
 
