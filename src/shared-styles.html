@@ -98,10 +98,6 @@
         line-height: 1.5;
       }
 
-      [flex-fit] {
-        @apply(--layout-fit);
-      }
-
       section { padding: 20px 0px; }
       section[hero] { background-color: #f5fcff; }
 
@@ -154,6 +150,14 @@
       a:hover {
         color: #5ca1d2;
         text-decoration: underline;
+      }
+
+      [flex-fit] {
+        @apply(--layout-fit);
+      }
+
+      [page-title] {
+        text-align: center;
       }
 
       paper-toolbar a,

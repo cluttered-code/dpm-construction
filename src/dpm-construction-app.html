@@ -53,6 +53,14 @@
       [tab-header] {
         height: 48px;
       }
+
+      paper-tabs {
+        width: 250px;
+      }
+
+      iron-pages {
+        padding: 0 20px;
+      }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -98,12 +106,12 @@
           <!-- Tab Navigation -->
           <template is="dom-if" if="[[largeScreen]]" restamp="true">
             <app-toolbar tab-header>
-              <paper-tabs flex-fit align-bottom selected="[[page]]" attr-for-selected="name">
-                  <template is="dom-repeat" items="[[_navItems]]">
-                    <paper-tab name="[[item.select]]" link>
-                      <a href="[[item.link]]" tabindex="-1">[[item.display]]</a>
-                    </paper-tab>
-                  </template>
+              <paper-tabs align-bottom selected="[[page]]" attr-for-selected="name">
+                <template is="dom-repeat" items="[[_navItems]]">
+                  <paper-tab name="[[item.select]]" link>
+                    <a href="[[item.link]]" tabindex="-1">[[item.display]]</a>
+                  </paper-tab>
+                </template>
               </paper-tabs>
             </app-toolbar>
           </template>
@@ -114,6 +122,7 @@
             <home-view name="home"></home-view>
             <projects-view name="projects"></projects-view>
             <services-view name="services"></services-view>
+            <contact-us-view name="contact-us"></contact-us-view>
             <not-found-view name="not-found"></not-found-view>
           </iron-pages>
         </section>
@@ -141,10 +150,6 @@
           type: Array,
           value: function() {
             return [{
-              select: 'home',
-              display: 'Home',
-              link: '/'
-            }, {
               select: 'projects',
               display: 'Projects',
               link: '/projects'
@@ -152,6 +157,10 @@
               select: 'services',
               display: 'Services',
               link: '/services'
+            }, {
+              select: 'contact-us',
+              display: 'Contact Us',
+              link: '/contact-us'
             }];
           }
         }
