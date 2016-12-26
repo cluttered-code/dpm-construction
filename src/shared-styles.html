@@ -11,78 +11,6 @@
 <dom-module id="shared-styles">
   <template>
     <style is="custom-style">
-      html {
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-        font-size: 16px;
-      }
-
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-        min-height: 100vh;
-        background-color: #f5f5f5;
-        color: #424540;
-        font-family: 'Roboto', 'Noto', sans-serif;
-        font-weight: 400;
-        line-height: 1.5;
-      }
-
-      section { padding: 20px 0px; }
-      section[hero] { background-color: #f5fcff; }
-
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-weight: 400;
-        margin: 0px;
-        padding: 0px;
-        line-height: 1em;
-      }
-
-      h1,
-      h3,
-      h5 {
-        font-family: 'Arimo', sans-serif;
-      }
-
-      h1 {
-        font-size: 50px;
-        margin: 30px 0px;
-      }
-
-      h2 {
-        color: #7E8D9D;
-        font-size: 35px;
-        margin: 20px 0px;
-      }
-
-      h3 {
-        font-size: 25px;
-        margin: 15px 0px;
-      }
-
-      h4 {
-        font-size: 20px;
-      }
-
-      a,
-      a:active,
-      a:visited,
-      a:focus {
-        color: #5ca1d2;
-        text-decoration: none;
-      }
-
-      a:hover {
-        color: #5ca1d2;
-        text-decoration: underline;
-      }
-
       :root {
         --default-primary-color: #3ea1e6;
         --dark-primary-color: #7ec0ee;
@@ -152,8 +80,80 @@
         --paper-toolbar-color: #ffffff;
       }
 
+      html {
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+        font-size: 16px;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background-color: #f5f5f5;
+        color: #424540;
+        font-family: 'Roboto', 'Noto', sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
       [flex-fit] {
         @apply(--layout-fit);
+      }
+
+      section { padding: 20px 0px; }
+      section[hero] { background-color: #f5fcff; }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 400;
+        margin: 0px;
+        padding: 0px;
+        line-height: 1em;
+      }
+
+      h1,
+      h3,
+      h5 {
+        font-family: 'Arimo', sans-serif;
+      }
+
+      h1 {
+        font-size: 50px;
+        margin: 30px 0px;
+      }
+
+      h2 {
+        color: #7E8D9D;
+        font-size: 35px;
+        margin: 20px 0px;
+      }
+
+      h3 {
+        font-size: 25px;
+        margin: 15px 0px;
+      }
+
+      h4 {
+        font-size: 20px;
+      }
+
+      a,
+      a:active,
+      a:visited,
+      a:focus {
+        color: #5ca1d2;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #5ca1d2;
+        text-decoration: underline;
       }
 
       paper-toolbar a,

@@ -56,12 +56,7 @@
     </style>
 
     <app-location route="{{route}}"></app-location>
-    <app-route
-      route="{{route}}"
-      pattern="/:page"
-      data="{{routeData}}"
-      tail="{{subroute}}">
-    </app-route>
+    <app-route route="{{route}}" pattern="/:page" data="{{routeData}}" tail="{{subroute}}"></app-route>
 
     <firebase-app
       auth-domain="dpm-construction.firebaseapp.com"
@@ -76,12 +71,8 @@
       <!-- Drawer Content -->
       <template is="dom-if" if="[[!largeScreen]]" restamp="true">
         <app-drawer opened="{{drawerOpened}}">
-          <app-toolbar></app-toolbar>
-            <paper-menu
-                selected="[[page]]"
-                attr-for-selected="name"
-                role="navigation"
-                on-tap="_closeDrawer">
+          <app-toolbar>Menu</app-toolbar>
+            <paper-menu role="navigation" selected="[[page]]" attr-for-selected="name" on-tap="_closeDrawer">
               <template is="dom-repeat" items="[[_navItems]]">
                 <a name="[[item.select]]" href="[[item.link]]" tabindex="-1">
                   <paper-item>[[item.display]]</paper-item>
@@ -107,9 +98,7 @@
           <!-- Tab Navigation -->
           <template is="dom-if" if="[[largeScreen]]" restamp="true">
             <app-toolbar tab-header>
-              <paper-tabs flex-fit align-bottom
-                  selected="[[page]]"
-                  attr-for-selected="name">
+              <paper-tabs flex-fit align-bottom selected="[[page]]" attr-for-selected="name">
                   <template is="dom-repeat" items="[[_navItems]]">
                     <paper-tab name="[[item.select]]" link>
                       <a href="[[item.link]]" tabindex="-1">[[item.display]]</a>
@@ -121,11 +110,7 @@
         </app-header>
 
         <section hero flex-fit>
-          <iron-pages
-              role="main"
-              selected="[[page]]"
-              attr-for-selected="name"
-              fallback-selection="not-found">
+          <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="not-found">
             <home-view name="home"></home-view>
             <not-found-view name="not-found"></not-found-view>
           </iron-pages>
