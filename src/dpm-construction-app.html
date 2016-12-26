@@ -112,6 +112,7 @@
         <section hero flex-fit>
           <iron-pages role="main" selected="[[page]]" attr-for-selected="name" fallback-selection="not-found">
             <home-view name="home"></home-view>
+            <projects-view name="projects"></projects-view>
             <services-view name="services"></services-view>
             <not-found-view name="not-found"></not-found-view>
           </iron-pages>
@@ -144,13 +145,13 @@
               display: 'Home',
               link: '/'
             }, {
+              select: 'projects',
+              display: 'Projects',
+              link: '/projects'
+            }, {
               select: 'services',
               display: 'Services',
               link: '/services'
-            }, {
-              select: 'not-found',
-              display: 'Not Found',
-              link: '/not-found'
             }];
           }
         }
