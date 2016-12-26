@@ -61,6 +61,13 @@
       iron-pages {
         padding: 0 20px;
       }
+
+      footer[sticky] {
+        bottom:0;
+        position:fixed;
+        width:100%;
+      }
+
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -127,6 +134,12 @@
           </iron-pages>
         </section>
       </app-header-layout>
+
+      <footer sticky>
+        <app-toolbar>
+          &copy; <a href="mailto:cluttered.code+dpm@gmail.com">David Clutter</a> 2016
+        </app-toolbar>
+      </footer>
     </app-drawer-layout>
   </template>
 
