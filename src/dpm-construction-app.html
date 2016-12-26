@@ -13,10 +13,12 @@
 <link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
 <link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
 
 <link rel="import" href="../bower_components/online-status-icon/online-status-icon.html">
 
@@ -42,6 +44,10 @@
       app-toolbar a:hover {
         color: var(--paper-toolbar-color);
         text-decoration: underline;
+      }
+
+      paper-menu {
+        padding: 0;
       }
 
       [tab-header] {
@@ -71,15 +77,17 @@
       <template is="dom-if" if="[[!largeScreen]]" restamp="true">
         <app-drawer opened="{{drawerOpened}}">
           <app-toolbar></app-toolbar>
-          <iron-selector
-              selected="[[page]]"
-              attr-for-selected="name"
-              role="navigation"
-              on-tap="_closeDrawer">
-            <template is="dom-repeat" items="[[_navItems]]">
-              <a name="{{item.select}}" href="{{item.link}}">{{item.display}}</a>
-            </template>
-          </iron-selector>
+            <paper-menu
+                selected="[[page]]"
+                attr-for-selected="name"
+                role="navigation"
+                on-tap="_closeDrawer">
+              <template is="dom-repeat" items="[[_navItems]]">
+                <a name="[[item.select]]" href="[[item.link]]" tabindex="-1">
+                  <paper-item>[[item.display]]</paper-item>
+                </a>
+              </template>
+            </paper-menu>
         </app-drawer>
       </template>
 
@@ -103,8 +111,8 @@
                   selected="[[page]]"
                   attr-for-selected="name">
                   <template is="dom-repeat" items="[[_navItems]]">
-                    <paper-tab name="{{item.select}}" link>
-                      <a href="{{item.link}}" tabindex="-1">{{item.display}}</a>
+                    <paper-tab name="[[item.select]]" link>
+                      <a href="[[item.link]]" tabindex="-1">[[item.display]]</a>
                     </paper-tab>
                   </template>
               </paper-tabs>

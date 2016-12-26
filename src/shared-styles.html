@@ -115,6 +115,11 @@
         --paper-menu-color: #424540;
         --paper-menu-disabled-color: #c9c9c9;
 
+        --paper-menu-selected-item: {
+            background-color: var(--paper-tabs-selection-bar-color);
+            font-weight: bold;
+          }
+
         --paper-progress-active-color: #3ea1e6;
         --paper-progress-secondary-color: #78bdee;
 
@@ -161,6 +166,19 @@
       paper-toolbar a:hover {
         color: var(--paper-toolbar-color);
         text-decoration: underline;
+      }
+
+
+        paper-menu a,
+        paper-menu a:hover,
+        paper-menu a:active,
+        paper-menu a:visited,
+        paper-menu a:focus {
+          text-decoration: none;
+        }
+
+      paper-menu .iron-selected paper-item {
+        @apply(--paper-menu-selected-item);
       }
 
       paper-button[primary] { color: #3ea1e6; }
